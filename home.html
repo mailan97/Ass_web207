@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="subjects mt-3">
+    </div>
+    <div ng-repeat="sub in list_subject" class="col-sm-4 mt-2 mb-3">
+        <div class="card">
+            <div class="card-body" style="margin-left:auto;margin-right:auto">
+                <img src="images/logos/{{sub.Logo}}" alt="">
+                <p class="card-title text-center">{{sub.Name}}</p>
+            </div>
+            <div class="card-footer text-center text-muted">
+                <a href="db/Quizs/{{sub.Id}}.js"><button class="btn btn-primary"
+                        style="margin:auto; display:block;">Kiểm tra ngay</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
