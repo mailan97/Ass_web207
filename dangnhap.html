@@ -1,0 +1,39 @@
+<form name="form_dn">
+    <div class="card">
+        <div class="card-header bg-warning">
+            <h5 class="card-title text-white">Đăng nhập</h5>
+        </div>
+        <div class="card-body">
+            <div class="row mt-2">
+                <div class="mb-3">
+                    <label for="" class="form-label">Tài khoản:</label>
+                    <input ng-model="user.username" type="text" name="tk" id="tk"
+                        class="form-control" placeholder="" aria-describedby="helpId" required>
+                    <small ng-hide="form_dn.tk.$untouched || form_dn.tk.$valid" class="text-danger">
+                        Không được để trống
+                    </small>
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Mật khẩu:</label>
+                    <input ng-model="user.password" type="password" name="mk" id="mk"
+                        class="form-control" placeholder="" aria-describedby="helpId" required>
+                    <small ng-hide="form_dn.mk.$untouched || form_dn.mk.$valid" class="text-danger">
+                        Không được để trống
+                    </small>
+                </div>
+                <div class="row m-0">
+                    <div class="col-7"></div>
+                    <div class="col-off col-5">
+                        <a class="text-danger nav-link ms-3" href="" >
+                            Quên mật khẩu?
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button ng-click="dangnhap()" class="btn btn-primary">Đăng nhập</button>
+            <button class="btn btn-secondary">Đóng</button>
+        </div>
+    </div>
+</form>

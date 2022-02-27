@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý người dùng</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        .loading {
+            background: rgba(0, 0, 0, .5);
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999;
+        }
+
+        .spinner-center {
+            top: 50%;
+            left: 50%;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body ng-app="qlus">
+    <div ng-controller="myctrl">
+        <div ng-show="isLoading" class="loading">
+            <div class="spinner-border text-primary spinner-center" role="status">
+            </div>
+        </div>
+        <div class="col-8 offset-2 alert {{ isSuccess == true ? 'alert-success' : 'alert-danger' }}"
+            ng-show="message.length != 0">
+            {{ message }}
+        </div>
+        <form ng-submit="onSubmitForm($event)" action="" class="col-8 offset-2">
+            <div class="form-group mt-3">
+                <label for="">Username:</label>
+                <input class="form-control" type="text" ng-model="user.username">
+            </div>
+            <div class="form-group mt-3">
+                <label for="">Password:</label>
+                <input class="form-control" type="text" ng-model="user.password">
+            </div>
+            <div class="form-group mt-3">
+                <label for="">Fullname:</label>
+                <input class="form-control" type="text" ng-model="user.fullname">
+            </div>
+            <div class="form-group mt-3">
+                <label for="">SĐT:</label>
+                <input class="form-control" type="text" ng-model="user.sdt">
+            </div>
+            <div class="form-group mt-3">
+                <label for="">Email:</label>
+                <input class="form-control" type="email" ng-model="user.email">
+            </div>
+            <div class="form-group mt-3 mb-4">
+                <label class="col-2">Giới tính:</label>
+                <div class="col-3">
+                    <!-- <div class="col-2"> -->
+                    <input type="radio" ng-model="user.gioi_tinh" value="true" name="gioi_tinh" id="gt_nam" />
+                    <label for="gt_nam" class="col-4">Nam</label>
+                    <!-- </div> -->
+                    <!-- <div class="col-2"> -->
+                    <input type="radio" ng-model="user.gioi_tinh" value="false" name="gioi_tinh" id="gt_nu" />
+                    <label for="gt_nu" class="col-4">Nữ</label>
+                    <!-- </div> -->
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <button class="btn btn-primary">Lưu</button>
+                <button type="reset" class="btn btn-secondary ml-3">Xóa form</button>
+            </div>
+        </form>
+
+        <div class="col-8 offset-2">
+            <table class="table mt-3">
+                <thead>
+                    <tr class="text-warning">
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Fullname</th>
+                        <th>Số ĐT</th>
+                        <th>Email</th>
+                        <th>Giới tính</th>
+                        <th colspan="2">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="us in students">
+                        <td>{{ us.id }}</td>
+                        <td>{{ us.username }}</td>
+                        <td>{{ us.password }}</td>
+                        <td>{{ us.fullname }}</td>
+                        <td>{{ us.sdt }}</td>
+                        <td>{{ us.email}}</td>
+                        <td>{{ us.gioi_tinh}}</td>
+                        <td>
+                            <button class="btn btn-primary">Sửa</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#modal_delete_{{ us.id }}">Xóa</button>
+
+                            <div class="modal fade" id="modal_delete_{{ us.id }}" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">XÁC NHẬN</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Bạn có chắc chắn muốn xóa?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Đóng</button>
+                                            <button type="button" ng-click="onDelete(us.id, $index)"
+                                                class="btn btn-danger">Xóa</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#">{{ i }}</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+
+    <script src="js/angularjs.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        var app = angular.module("qlus", []);
+        app.controller("myctrl", function ($scope, $http) {
+            // Khởi tạo
+            $scope.students = [];
+            $scope.isSuccess = true;
+            $scope.message = "";
+            $scope.user = {
+                id: "",
+                username: "",
+                password: "",
+                fullname: "",
+                sdt: "",
+                email: "",
+                gioi_tinh: ""
+            };
+            $scope.isLoading = false;
+            const api = 'https://62149a6789fad53b1f187b5e.mockapi.io/user';
+
+            $scope.isLoading = true;
+            $http.get(api) // Gửi 1 request dạng GET lên API
+                .then(function (response) {
+                    $scope.students = response.data;
+                    $scope.totalPage = Math.ceil($scope.students.length / 10);
+                    $scope.isLoading = false;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    $scope.isLoading = false;
+                });
+
+            // TODO
+            // if (index == -1) {
+            //     // them moi
+            // } else {
+            //     // cap nhat
+            // }
+
+            $scope.onSubmitForm = function (event) {
+                event.preventDefault();
+
+                $scope.isLoading = true;
+                // Gửi request dạng POST kèm data lên API
+                $http.post(api, $scope.user)
+                    .then(function (response) {
+                        // Tắt loading
+                        $scope.isLoading = false;
+
+                        // Thông báo
+                        $scope.message = "Thêm mới thành công";
+                        $scope.isSuccess = true;
+
+                        // Thêm vào bảng
+                        $scope.students.push(response.data);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        $scope.isLoading = false;
+                        $scope.message = "Thêm mới thất bại";
+                        $scope.isSuccess = false;
+                    });
+            }
+
+            $scope.onDelete = function (id, index) {
+                console.log(id);
+                const deleteAPI = api + '/' + id;
+                $scope.isLoading = true;
+                $http.delete(deleteAPI)
+                    .then(function (response) {
+                        $scope.isLoading = false;
+                        console.log("Xóa thành công");
+                        $scope.students.splice(index, 1);
+                        // splice -> xóa trong $scope.students
+
+                        $("#modal_delete_" + id).modal('hide');
+                    })
+                    .catch(function (error) { 
+                        console.error(error)
+                    })
+            }
+        });
+
+        
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-3">
+            <div class="card-header bg-secondary text-white pt-3">
+                <h5><i class="bi bi-envelope-fill p-2"></i>Góp ý</h5>
+            </div>
+            <div class="card-body">
+                <div class="row p-1 m-0">
+
+                    <form name="form_sv">
+                        <div class="mt-1 mb-4">
+                            <textarea ng-model="sv.ykien" class="form-control" type="text" name="ykien"
+                                id="ykien" required autocomplete="off" cols="30" rows="5"
+                                placeholder="Ý kiến"></textarea>
+                            <small ng-hide="form_sv.ykien.$untouched || form_sv.ykien.$valid"
+                                class="text-danger">
+                                Không được để trống
+                            </small>
+                        </div>
+                        <div class="mb-4">
+                            <input ng-model="sv.fullname" class="form-control" type="text"
+                                name="fullname" id="fullname" required autocomplete="off"
+                                placeholder="Họ và tên" />
+                            <small ng-hide="form_sv.fullname.$untouched || form_sv.fullname.$valid"
+                                class="text-danger">
+                                Không được để trống
+                            </small>
+                        </div>
+                        <div class="mb-4">
+                            <div class="input-group">
+                                <input ng-model="sv.email" class="form-control" type="email"
+                                    name="email" id="email" autocomplete="off" required
+                                    placeholder="Email" />
+                                <span class="input-group-text">@fpt.edu.vn</span>
+                            </div>
+                            <div ng-hide="form_sv.email.$untouched || form_sv.email.$valid"
+                                class="text-danger">
+                                <small ng-show="form_sv.email.$error.required">
+                                    Không được để trống
+                                </small>
+                                <small ng-show="form_sv.email.$error.email">
+                                    Không dúng định dạng email
+                                </small>
+                            </div>
+                        </div>
+                        <button class="btn col-2 mt-3 mb-0 bg-primary text-white">Gửi</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

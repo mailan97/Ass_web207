@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+</head>
+
+<body ng-app="myapp">
+    <div class="container">
+        <header class="row reponsive">
+            <div id="carouselHeader" class="carousel slide p-0" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselHeader" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselHeader" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="images/header3.png" class="col-12 d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="images/header3.png" class="col-12 d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselHeader"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselHeader"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </header>
+        <nav class="row navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#index"><i class="bi bi-house-fill p-2"></i>Trang chủ</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#!gioithieu"><i
+                                    class="bi bi-list-task p-2"></i>Giới thiệu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#!lienhe"><i class="bi bi-telephone-fill p-2"></i>Liên hệ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#!gopy"><i class="bi bi-envelope-fill p-2"></i>Góp ý</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#!hoidap"><i class="bi bi-question-circle-fill p-2"></i>Hỏi
+                                đáp</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#!admin"><i class="bi bi-building p-2"></i>Quản lý người dùng</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li ng-show="inStatus " class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active text-white" href="#"
+                                data-bs-target="navbarDropdownMenuLink1" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Tài khoản
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                                <li class="p-3">Hello, <strong>{{fullName}}</strong></li>
+                                <li><a class="dropdown-item" href="#!doimk" >Đổi mật khẩu</a></li>
+                                <li><a class="dropdown-item" href="#!quenmk" >Quên mật khẩu</a></li>
+                                <hr>
+                                <li><a class="dropdown-item" href="#!capnhaths">Cập nhật tài khoản</a></li>
+                                <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                        <li ng-show="!inStatus " class="nav-item"><a class="nav-link text-white" href="#!dangnhap" >Đăng nhập</a></li>
+                        <li ng-show="!inStatus " class="nav-item"><a class="nav-link text-white" href="#!dangky" >Đăng ký</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="row">
+            <article class="col-12 col-md-9 mt-4">   
+                <div ng-view></div>
+            </article>
+            <aside class="col-12 col-md-3 p-0 mt-4 mb-4">
+                <div class="card">
+                    <div class="card-header bg-warning" data-bs-toggle="collapse" data-bs-target="#collapseExample">
+                        <strong>
+                            <i class="bi bi-list-stars"
+                                style="font-variant: small-caps; font-style: normal; font-size: large; cursor: pointer;">
+                                Danh mục môn học</i>
+                        </strong>
+                    </div>
+                    <div class="collapse" id="collapseExample" ng-controller="subject_Ctrl">
+                        <div class="list-group list-group-flush" ng-repeat="sub in list_subject">
+                            <a href="#" class="list-group-item">{{sub.Name}}</a>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        <footer class="row bg-secondary text-center text-white p-3">
+            <span>FPT Polytechnic &copy; 2017. All rights reserved.</span>
+        </footer>
+
+        
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/angularjs.min.js"></script>
+    <script src="js/angular-route.js"></script>
+    <script src="js/myapp.js"></script>
+</body>
+
+</html>

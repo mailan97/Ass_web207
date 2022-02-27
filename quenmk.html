@@ -1,0 +1,47 @@
+<form name="form_qmk">
+    <div class="card">
+        <div class="card-header bg-warning">
+            <h5 class="card-title text-white">Quên mật khẩu</h5>
+        </div>
+        <div class="card-body">
+            <div class="row mt-2">
+                <div class="row mt-3">
+                    <label for="tk2" class="col-3">Tài khoản:</label>
+                    <div class="col-9">
+                        <input ng-model="taikhoan" class="form-control" required type="text" name="tk2" id="tk2">
+                        <small ng-hide="form_qmk.tk2.$untouched || form_qmk.tk2.$valid" class="text-danger">
+                            Không được để trống
+                        </small>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <label for="pass1" class="col-3">Mật khẩu:</label>
+                    <div class="col-9">
+                        <input ng-model="matkhau" class="form-control" required type="password" name="pass1" id="pass1">
+                        <small ng-hide="form_qmk.pass1.$untouched || form_qmk.pass1.$valid" class="text-danger">
+                            Không được để trống
+                        </small>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <label for="em" class="col-3">Email:</label>
+                    <div class="col-9">
+                        <input ng-model="email" type="email" id="em" name="em" class="form-control" required>
+                        <div ng-hide="form_qmk.em.$untouched || form_qmk.em.$valid" class="text-danger">
+                            <small ng-show="form_qmk.em.$error.required">
+                                Không được để trống
+                            </small>
+                            <small ng-show="form_qmk.em.$error.email">
+                                Không dúng định dạng email
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary">Gửi</button>
+            <button class="btn btn-secondary">Đóng</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,45 @@
+<form name="form_dmk">
+    <div class="card">
+        <div class="card-header bg-warning">
+            <h5 class="card-title text-white">Đổi mật khẩu</h5>
+        </div>
+        <div class="card-body">
+            <div class="row mt-2">
+                <div class="row mt-3">
+                    <label ng-model="passCu" for="pass2" class="col-4">Mật khẩu cũ:</label>
+                    <div class="col-8">
+                        <input ng-model="oldPass" class="form-control" required type="pass" name="pass2"
+                            id="pass2">
+                        <small ng-hide="form_dmk.pass2.$untouched || form_dmk.pass2.$valid" class="text-danger">
+                            Không được để trống
+                        </small>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <label for="ps1" class="col-4">Mật khẩu mới:</label>
+                    <div class="col-8">
+                        <input ng-model="newPass" type="password" required id="ps1" name="ps1"
+                            class="form-control">
+                        <small ng-hide="form_dmk.ps1.$untouched || form_dmk.ps1.$valid" class="text-danger">
+                            Không được để trống
+                        </small>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <label for="ps2" class="col-4">Xác nhận mật khẩu mới:</label>
+                    <div class="col-8">
+                        <input ng-model="newPass2" type="password" required id="ps2" name="ps2"
+                            class="form-control">
+                        <small ng-hide="form_dmk.ps2.$untouched || form_dmk.ps2.$valid" class="text-danger">
+                            Không được để trống
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary" ng-click="doimk()">Xác nhận</button>
+            <button class="btn btn-secondary">Đóng</button>
+        </div>
+    </div>
+</form>
